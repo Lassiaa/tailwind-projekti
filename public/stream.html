@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js" defer></script>
+    <script src="chat.js" defer></script>
+    <link href="./oma/index.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
+
+</head>
+<body class="bg-raisin-black">
+    <nav class="flex flex-row text-white hover:text-platinum text-left text-xl font-light bg-raisin-black w-full h-20">
+      <h1 class="text-xl font-medium m-2 self-center grow">
+        <a href="index.html">AutoEventAlerts.com</a>
+      </h1>
+  
+      <div class="m-2 self-center grow flex">
+        <a href="javascript:void(0)" 
+          class="flex w-full text-white hover:text-platinum font-semibold duration-300"
+          onclick="openMenu()">
+          <span class="w-full text-right text-3xl">&#9776;</span>
+        </a>
+      </div>
+  
+      <div id="menu" class="fixed z-50 w-0 h-0 flex justify-center items-center bg-delft-blue opacity-0 duration-500">
+        <a href="javascript:void(0)"
+            class="fixed top-6 right-8 text-white hover:text-falu-red text-7xl font-semibold duration-300"
+            onclick="closeMenu()">&times;</a>
+  
+        <div class="flex flex-col">
+          <div class="flex flex-col text-white text-center text-2xl font-light space-y-8">
+            <a class="hover:text-platinum duration-300" href="#livenow" onclick="closeMenu()">Live now</a>
+            <a class="hover:text-platinum duration-300" href="#events" onclick="closeMenu()">Events</a>
+            <a class="hover:text-platinum duration-300" href="#aboutus" onclick="closeMenu()">About us</a>
+          </div>
+  
+          <div class="fixed left-0 bottom-14 w-full text-white text-center text-xl font-light space-y-2">
+            <h3>AutoEventAlerts.com</h3>
+            <p>" Because every car event needs an audience "</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+    <div class="">
+      <div class="h-80 flex flex-col flex-wrap bg-platinum m-1 rounded-lg">
+        <video
+        id="my-video"
+        class="video-js vjs-theme-oma w-full"
+    >
+        <source src="./timelapse.mp4" type="video/ogg">
+        <p class="vjs-no-js vjs-theme-oma">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank">
+                supports HTML5 video
+            </a>
+        </p>
+    </video>
+      </div>
+      <div class="bg-white mx-1 rounded-lg">
+        <div class="h-44 bg-raisin-black bg-opacity-60 text-white text-center rounded-lg px-1">
+          <h3 class="text-xl py-4">
+            Event info
+          </h3>
+          <p class="pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum sint facere a tenetur assumenda dolore vitae rerum qui quia hic.</p>
+        </div>
+      </div>
+    </div>
+    
+    <footer id="aboutus" class="bg-delft-blue mt-10">
+      <p class="text-white text-center text-xl py-20">Footer</p>
+    </footer>
+
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+    <script>
+      let menu = document.getElementById("menu");
+    
+      // this function is used to open the menu
+      function openMenu() {
+          menu.classList.remove("w-0", "h-0", "opacity-0");
+          menu.classList.add("w-screen", "h-screen", "opacity-96");
+      }
+    
+      // this function is used to close the menu
+      function closeMenu() {
+          menu.classList.remove("w-screen", "h-screen", "opacity-96");
+          menu.classList.add("w-0", "h-0", "opacity-0");
+      }
+
+      let myPlayer = document.querySelector(".video-js");
+
+        console.log(myPlayer);
+
+        videojs(myPlayer, {
+        controls: true,
+        autoplay: false,
+        preload: "auto",
+        poster: "puu.jpg",
+        });
+
+        myPlayer.classList.add("vjs-omateema");
+    </script>
+</body>  
+</html>
