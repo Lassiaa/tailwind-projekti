@@ -109,27 +109,32 @@
     </video>
       </div>
       <div class="max-h-96">
-        <section id="login" class="w-full flex flex-col h-96">
-          <select id="roomList" class="w-fit mt-5 self-center rounded-md"></select>
+        <section id="login" class="w-full flex flex-col h-96 justify-end">
+          <!-- <select id="roomList" class="w-fit mt-5 self-center rounded-md"></select> -->
       
           <form id="uForm" class="flex flex-col justify-center">
             <input type="text" id="u" placeholder="Username" class="w-40 self-center rounded-md my-6">
-            <button id="joinButton" type="submit" class="w-fit self-center relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                Join Room
-              </span>
-            </button>
+            <div class="flex w-full my-6 justify-center">
+
+              <button 
+                id="joinButton" 
+                type="submit"
+                class="bg-falu-red self-center transition ease-in-out delay-100 py-2 px-4 rounded-md text-white hover:-translate-y-1 hover:scale-110 hover:bg-opacity-80 duration-200"
+              >
+                Join Chat
+              </button>
+            </div>
           </form>
         </section>
       
         <section id="chat" class="w-full flex flex-col h-96">
-          <form id="mForm" class="flex-grow">
-            <ul id="messages" class="mx-2 text-white"></ul>
+          <form id="mForm" class="flex flex-wrap flex-row flex-grow h-96">
+            <ul id="messages" class="mx-2 text-white overflow-y-auto max-h-80 w-full"></ul>
         
-            <div class="w-full flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
-              <p id="logged"></p>
-              <input id="m" placeholder="Message" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></input>
-              <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+            <div class="w-full flex items-center px-3 py-2 rounded-lg bg-delft-blue dark:bg-delft-blue self-end">
+              <p id="logged" class="text-white"></p>
+              <input id="m" placeholder="Message" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-falu-red focus:border-falu-red dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-falu-red dark:focus:border-falu-red" placeholder="Your message..."></input>
+              <button type="submit" class="inline-flex justify-center p-2 text-falu-red rounded-full cursor-pointer hover:bg-delft-blue dark:text-falu-red dark:hover:bg-gray-600">
                 <svg class="w-5 h-5 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                   <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
                 </svg>

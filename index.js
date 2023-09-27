@@ -8,7 +8,8 @@ const io = require("socket.io")(http);
 app.use(express.static("public"));
 
 const users = [];
-const rooms = ["room1", "room2", "room3"];
+// const rooms = ["room1", "room2", "room3"];
+const rooms = ["room1"];
 const history = [];
 const client = [];
 
