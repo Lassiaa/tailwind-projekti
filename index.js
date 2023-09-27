@@ -55,14 +55,22 @@ io.on("connection", (socket) => {
       socket.nickname = nickname;
 
       socket.emit("message", `You joined ${roomName}`);
-      socket.to(roomName).emit("message", `${socket.nickname} joined ${roomName}`);
+      socket
+        .to(roomName)
+        .emit("message", `${socket.nickname} joined ${roomName}`);
 
       socket.on("chat message", (msg) => {
         console.log("message by: " + nickname, msg, " in ", roomName);
         if (msg === "!users") {
-          socket.emit("chat message", `Users online in ${roomName}: ${getUserList(roomName)}`);
+          socket.emit(
+            "chat message",
+            `Users online in ${roomName}: ${getUserList(roomName)}`
+          );
         } else {
-          io.to(roomName).emit("chat message", `${getUserName(socket.id)}: ${msg}`);
+          io.to(roomName).emit(
+            "chat message",
+            `${getUserName(socket.id)}: ${msg}`
+          );
         }
       });
     }
@@ -81,7 +89,10 @@ io.on("connection", (socket) => {
     socket.emit("Start_Chat");
     socket.on("Register_Name", (data) => {
       console.log(data);
-      io.sockets.emit("r_name", "<strong>" + data + "</strong> Has Joined The Chat");
+      io.sockets.emit(
+        "r_name",
+        "<strong>" + data + "</strong> Has Joined The Chat"
+      );
 
       socket.on("Send_msg", (data) => {
         history.push(data);
@@ -99,7 +110,9 @@ io.on("connection", (socket) => {
       socket.room
     );
     if (socket.room) {
-      socket.to(socket.room).emit("message", `${socket.nickname} left ${socket.room}`);
+      socket
+        .to(socket.room)
+        .emit("message", `${socket.nickname} left ${socket.room}`);
       deleteUserById(socket.id);
     }
   });

@@ -1,11 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./public/**/*.{html,js}",
-    "./node_modules/flowbite/**/*.js"
-  ],
+  content: ["./public/**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
+      borderRadius: {
+        more: "4rem",
+      },
+      rotate: {
+        20: "20deg",
+      },
+      width: {
+        large: "1024px",
+        extralarge: "1280px",
+      },
       colors: {
         "raisin-black": "#161925",
         "delft-blue": "#3A405A",
@@ -13,14 +20,16 @@ module.exports = {
         platinum: "#D9D9D9",
       },
       screens: {
-        sm: "640px",
+        sm: "480px",
         md: "768px",
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
       },
       backgroundImage: {
-        'stream': "url('./images/puu.jpg')",
+        puu: "url('./images/puu.jpg')",
+        stream: "url('./images/shell.jpg')",
+        porsche: "url('./images/porsche992gt3.jpg')",
       },
     },
   },

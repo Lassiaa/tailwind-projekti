@@ -4,56 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stream</title>
+    <link href="style.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <link href="/dist/output.css" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
-    <script src="index.js" defer></script>
-    <script src="chat.js" defer></script>
     <link href="./oma/index.css" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
-
-</head>
+    <script src="index.js" defer></script>
+    <script src="chat.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+  </head>
 <body class="bg-raisin-black">
-    <nav class="flex flex-row text-white hover:text-platinum text-left text-xl font-light bg-raisin-black w-full h-20">
-      <h1 class="text-xl font-medium m-2 self-center grow">
-        <a href="index.html">AutoEventAlerts.com</a>
-      </h1>
-  
-      <div class="m-2 self-center grow flex">
-        <a href="javascript:void(0)" 
-          class="flex w-full text-white hover:text-platinum font-semibold duration-300"
-          onclick="openMenu()">
-          <span class="w-full text-right text-3xl">&#9776;</span>
-        </a>
+  <nav
+  class="flex flex-row text-white hover:text-platinum text-left text-xl font-light bg-raisin-black w-full h-20"
+>
+  <h1 class="text-xl font-medium m-2 ml-4 self-center grow">
+    <a href="index.html">AutoEventAlerts.com</a>
+  </h1>
+
+  <div
+    class="hidden md:flex flex-row text-white text-xl font-light items-center mr-12"
+  >
+    <a class="hover:text-platinum duration-300 mx-6" href="index.html/#livenow"
+      >Live now</a
+    >
+    <a class="hover:text-platinum duration-300 mx-6" href="index.html/#events"
+      >Events</a
+    >
+    <a class="hover:text-platinum duration-300 mx-6" href="index.html/#aboutus"
+      >About us</a
+    >
+  </div>
+
+  <div class="flex md:hidden m-2 self-center grow mr-4">
+    <a
+      href="javascript:void(0)"
+      class="flex w-full text-white hover:text-platinum font-semibold duration-300"
+      onclick="openMenu()"
+    >
+      <span class="w-full text-right text-3xl">&#9776;</span>
+    </a>
+  </div>
+
+  <div
+    id="menu"
+    class="fixed z-50 w-0 h-0 flex justify-center items-center bg-delft-blue opacity-0 duration-500"
+  >
+    <a
+      href="javascript:void(0)"
+      class="fixed top-6 right-8 text-white hover:text-falu-red text-7xl font-semibold duration-300"
+      onclick="closeMenu()"
+      >&times;</a
+    >
+
+    <div class="flex flex-col">
+      <div
+        class="flex flex-col text-white text-center text-2xl font-light space-y-8"
+      >
+        <a
+          class="hover:text-platinum duration-300"
+          href="index.html/#livenow"
+          onclick="closeMenu()"
+          >Live now</a
+        >
+        <a
+          class="hover:text-platinum duration-300"
+          href="index.html/#events"
+          onclick="closeMenu()"
+          >Events</a
+        >
+        <a
+          class="hover:text-platinum duration-300"
+          href="index.html/#aboutus"
+          onclick="closeMenu()"
+          >About us</a
+        >
       </div>
-  
-      <div id="menu" class="fixed z-50 w-0 h-0 flex justify-center items-center bg-delft-blue opacity-0 duration-500">
-        <a href="javascript:void(0)"
-            class="fixed top-6 right-8 text-white hover:text-falu-red text-7xl font-semibold duration-300"
-            onclick="closeMenu()">&times;</a>
-  
-        <div class="flex flex-col">
-          <div class="flex flex-col text-white text-center text-2xl font-light space-y-8">
-            <a class="hover:text-platinum duration-300" href="#livenow" onclick="closeMenu()">Live now</a>
-            <a class="hover:text-platinum duration-300" href="#events" onclick="closeMenu()">Events</a>
-            <a class="hover:text-platinum duration-300" href="#aboutus" onclick="closeMenu()">About us</a>
-          </div>
-  
-          <div class="fixed left-0 bottom-14 w-full text-white text-center text-xl font-light space-y-2">
-            <h3>AutoEventAlerts.com</h3>
-            <p>" Because every car event needs an audience "</p>
-          </div>
-        </div>
+
+      <div
+        class="fixed left-0 bottom-14 w-full text-white text-center text-xl font-light space-y-2"
+      >
+        <h3>AutoEventAlerts.com</h3>
+        <p>" Because every car event needs an audience "</p>
       </div>
-    </nav>
-  
-    <div class="">
-      <div class="h-80 flex flex-col flex-wrap bg-platinum m-1 rounded-lg">
+    </div>
+  </div>
+</nav>
+
+    <div class="grid grid-cols-1 gap-x-0.5 md:grid-cols-3 xl:w-extralarge mx-auto">
+      <div class="h-80 md:h-96 flex flex-col flex-wrap m-1 rounded-lg col-span-2">
         <video
         id="my-video"
-        class="video-js vjs-theme-oma w-full"
+        class="video-js vjs-theme-oma w-full h-full rounded-lg"
     >
-        <source src="./timelapse.mp4" type="video/ogg">
+        <source src="https://acfd755e18f1.entrypoint.cloud.wowza.com/app-757W91XV/ngrp:7dbc7c4e_all/playlist.m3u8" type="application/x-mpegURL">
+        <source src="" type="application/x-mpegURL">
         <p class="vjs-no-js vjs-theme-oma">
             To view this video please enable JavaScript, and consider upgrading to a
             web browser that
@@ -63,13 +108,37 @@
         </p>
     </video>
       </div>
-      <div class="bg-white mx-1 rounded-lg">
-        <div class="h-44 bg-raisin-black bg-opacity-60 text-white text-center rounded-lg px-1">
-          <h3 class="text-xl py-4">
-            Event info
-          </h3>
-          <p class="pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum sint facere a tenetur assumenda dolore vitae rerum qui quia hic.</p>
-        </div>
+      <div class="max-h-96">
+        <section id="login" class="w-full flex flex-col h-96">
+          <select id="roomList" class="w-fit mt-5 self-center rounded-md"></select>
+      
+          <form id="uForm" class="flex flex-col justify-center">
+            <input type="text" id="u" placeholder="Username" class="w-40 self-center rounded-md my-6">
+            <button id="joinButton" type="submit" class="w-fit self-center relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Join Room
+              </span>
+            </button>
+          </form>
+        </section>
+      
+        <section id="chat" class="w-full flex flex-col h-96">
+          <form id="mForm" class="flex-grow">
+            <ul id="messages" class="mx-2 text-white"></ul>
+        
+            <div class="w-full flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+              <p id="logged"></p>
+              <input id="m" placeholder="Message" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></input>
+              <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                <svg class="w-5 h-5 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                  <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                </svg>
+                <span class="sr-only">Send message</span>
+              </button>
+            </div>
+          </form>
+        </section>
+        
       </div>
     </div>
     
@@ -94,17 +163,19 @@
       }
 
       let myPlayer = document.querySelector(".video-js");
+      
+      videojs(myPlayer, {
+      controls: true,
+      autoplay: false,
+      preload: "auto",
+      poster: "puu.jpg",
+      });
 
-        console.log(myPlayer);
-
-        videojs(myPlayer, {
-        controls: true,
-        autoplay: false,
-        preload: "auto",
-        poster: "puu.jpg",
-        });
-
-        myPlayer.classList.add("vjs-omateema");
+      myPlayer.classList.add("vjs-omateema");
     </script>
+      <script defer src="chat.js"></script>
+      <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    
 </body>  
 </html>

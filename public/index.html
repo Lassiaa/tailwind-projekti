@@ -1,152 +1,316 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="styles.css" rel="stylesheet">
-  <link href="/dist/output.css" rel="stylesheet">
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="index.js" defer></script>
-  <script src="chat.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js" defer></script>
+    <script src="chat.js" defer></script>
 
-  <title>AutoEventAlerts.com</title>
-</head>
-<body class="bg-raisin-black">
-  <nav class="flex flex-row text-white hover:text-platinum text-left text-xl font-light bg-raisin-black w-full h-20">
-    <h1 class="text-xl font-medium m-2 self-center grow">
-      <a href="index.html">AutoEventAlerts.com</a>
-    </h1>
+    <title>AutoEventAlerts.com</title>
+  </head>
+  <style>
+    #info {
+      transform: translateY(100%) translateX(-20%) rotate(20deg);
+      opacity: 0;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
 
-    <div class="m-2 self-center grow flex">
-      <a href="javascript:void(0)" 
-        class="flex w-full text-white hover:text-platinum font-semibold duration-300"
-        onclick="openMenu()">
-        <span class="w-full text-right text-3xl">&#9776;</span>
-      </a>
-    </div>
+    #infotxt {
+      transform: translateY(100%) translateX(-20%);
+      opacity: 0;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
 
-    <div id="menu" class="fixed z-50 w-0 h-0 flex justify-center items-center bg-delft-blue opacity-0 duration-500">
-      <a href="javascript:void(0)"
+    #banner:hover #info {
+      transform: translateY(0) translateX(0) rotate(20deg);
+      opacity: 1;
+    }
+
+    #banner:hover #infotxt {
+      transform: translateY(0) translateX(0);
+      opacity: 1;
+    }
+  </style>
+  <body class="bg-raisin-black">
+    <nav
+      class="flex flex-row text-white hover:text-platinum text-left text-xl font-light bg-raisin-black w-full h-20"
+    >
+      <h1 class="text-xl font-medium m-2 ml-4 self-center grow">
+        <a href="index.html">AutoEventAlerts.com</a>
+      </h1>
+
+      <div
+        class="hidden md:flex flex-row text-white text-xl font-light items-center mr-12"
+      >
+        <a class="hover:text-platinum duration-300 mx-6" href="#livenow"
+          >Live now</a
+        >
+        <a class="hover:text-platinum duration-300 mx-6" href="#events"
+          >Events</a
+        >
+        <a class="hover:text-platinum duration-300 mx-6" href="#aboutus"
+          >About us</a
+        >
+      </div>
+
+      <div class="flex md:hidden m-2 self-center grow mr-4">
+        <a
+          href="javascript:void(0)"
+          class="flex w-full text-white hover:text-platinum font-semibold duration-300"
+          onclick="openMenu()"
+        >
+          <span class="w-full text-right text-3xl">&#9776;</span>
+        </a>
+      </div>
+
+      <div
+        id="menu"
+        class="fixed z-50 w-0 h-0 flex justify-center items-center bg-delft-blue opacity-0 duration-500"
+      >
+        <a
+          href="javascript:void(0)"
           class="fixed top-6 right-8 text-white hover:text-falu-red text-7xl font-semibold duration-300"
-          onclick="closeMenu()">&times;</a>
+          onclick="closeMenu()"
+          >&times;</a
+        >
 
-      <div class="flex flex-col">
-        <div class="flex flex-col text-white text-center text-2xl font-light space-y-8">
-          <a class="hover:text-platinum duration-300" href="#livenow" onclick="closeMenu()">Live now</a>
-          <a class="hover:text-platinum duration-300" href="#events" onclick="closeMenu()">Events</a>
-          <a class="hover:text-platinum duration-300" href="#aboutus" onclick="closeMenu()">About us</a>
-        </div>
+        <div class="flex flex-col">
+          <div
+            class="flex flex-col text-white text-center text-2xl font-light space-y-8"
+          >
+            <a
+              class="hover:text-platinum duration-300"
+              href="#livenow"
+              onclick="closeMenu()"
+              >Live now</a
+            >
+            <a
+              class="hover:text-platinum duration-300"
+              href="#events"
+              onclick="closeMenu()"
+              >Events</a
+            >
+            <a
+              class="hover:text-platinum duration-300"
+              href="#aboutus"
+              onclick="closeMenu()"
+              >About us</a
+            >
+          </div>
 
-        <div class="fixed left-0 bottom-14 w-full text-white text-center text-xl font-light space-y-2">
-          <h3>AutoEventAlerts.com</h3>
-          <p>" Because every car event needs an audience "</p>
+          <div
+            class="fixed left-0 bottom-14 w-full text-white text-center text-xl font-light space-y-2"
+          >
+            <h3>AutoEventAlerts.com</h3>
+            <p>" Because every car event needs an audience "</p>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="">
-    <div class="h-80 flex flex-col flex-wrap bg-stream bg-no-repeat bg-cover bg-center bg-opacity-60 m-1 rounded-lg">
-      <div class="mt-8 w-4/12 bg-falu-red self-end opacity-60 text-white py-2 rounded-l-xl">
-        <p class="pl-6">04.09.2023</p>
-      </div>
-      <a href="/stream.html" class="w-full mt-20 self-center text-xl font-bold underline text-center text-white opacity-60">
-        Featured stream
+    <div id="banner" class="lg:w-large mx-auto">
+      <a href="/stream.html">
+        <div
+          class="h-96 bg-stream bg-no-repeat bg-cover bg-center m-1 rounded-lg relative"
+        >
+          <div
+            class="bg-black w-full h-full rounded-lg flex flex-col flex-wrap bg-opacity-50 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+          >
+            <div
+              id="date"
+              class="mt-8 w-4/12 bg-falu-red self-end opacity-60 text-white py-2 rounded-l-xl"
+            >
+              <p class="pl-6">27.09.2023</p>
+            </div>
+            <h3
+              class="w-full mt-20 self-center text-xl font-bold underline text-center text-white opacity-60"
+            >
+              Featured stream
+            </h3>
+
+            <div
+              id="info"
+              class="rotate-20 hidden md:block absolute -bottom-28 -left-2 w-2/5 h-4/5 mx-4 bg-raisin-black bg-opacity-60 rounded-t-more"
+            ></div>
+
+            <div
+              id="infotxt"
+              class="hidden md:block absolute bottom-0 left-0 w-2/5 h-2/5 mx-4 text-white text-center px-1"
+            >
+              <h3 class="text-xl py-4">Event info</h3>
+              <p class="pb-2">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+                sint facere a tenetur assumenda dolore vitae rerum qui quia hic.
+              </p>
+            </div>
+          </div>
+        </div>
       </a>
-    </div>
-    <div class="bg-white mx-1 rounded-lg">
-      <div class="h-44 bg-raisin-black bg-opacity-60 text-white text-center rounded-lg px-1">
-        <h3 class="text-xl py-4">
-          Event info
-        </h3>
-        <p class="pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum sint facere a tenetur assumenda dolore vitae rerum qui quia hic.</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="w-full my-40 text-white text-center text-xl font-light space-y-2">
-    <h3>AutoEventAlerts.com</h3>
-    <p>" Because every car event needs an audience "</p>
-  </div>
-
-  <div id="livenow" class="flex flex-col bg-delft-blue py-10 my-10">
-    <h3 class="text-2xl text-white py-6 pl-4">Live now</h3>
-    
-    <div class="h-60 mx-4 my-2 flex flex-row flex-wrap bg-platinum rounded-lg">
-      <div class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl">
-        <p class="pl-2">Event: Rusan Shell</p>
-      </div>
-      <div class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg">
-        <p class="grow px-2">Streamer_1</p>
-        <p class="grow text-right px-2">5 viewers</p>
+      <div class="bg-white mx-1 rounded-lg block md:hidden">
+        <div
+          class="h-44 bg-raisin-black bg-opacity-60 text-white text-center rounded-lg px-1"
+        >
+          <h3 class="text-xl py-4">Event info</h3>
+          <p class="pb-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+            sint facere a tenetur assumenda dolore vitae rerum qui quia hic.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="h-60 mx-4 my-2 flex flex-row flex-wrap bg-platinum rounded-lg">
-      <div class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl">
-        <p class="pl-2">Event: ACCS 2023</p>
+    <div
+      class="w-full my-40 text-white text-center text-xl font-light space-y-2"
+    >
+      <h3>AutoEventAlerts.com</h3>
+      <p>" Because every car event needs an audience "</p>
+    </div>
+
+    <div class="bg-delft-blue py-10 my-10">
+      <h3 class="text-2xl text-white py-6 pl-4">Live now</h3>
+
+      <div
+        id="livenow"
+        class="grid grid-cols-1 gap-x-0.5 sm:grid-cols-2 lg:grid-cols-3 bg-delft-blue py-10"
+      >
+        <a href="stream.html">
+          <div
+            class="h-60 mx-4 my-2 bg-stream bg-no-repeat bg-cover bg-center rounded-lg"
+          >
+            <div
+              class="w-full h-full rounded-lg bg-black flex flex-row flex-wrap bg-opacity-50 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+            >
+              <div
+                class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl"
+              >
+                <p class="pl-2">Event: Rusan Shell</p>
+              </div>
+              <div
+                class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg"
+              >
+                <p class="grow px-2">Streamer_1</p>
+                <p class="grow text-right px-2">5 viewers</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="">
+          <div class="h-60 mx-4 my-2 bg-platinum rounded-lg">
+            <div
+              class="w-full h-full rounded-lg bg-black flex flex-row flex-wrap bg-opacity-40 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+            >
+              <div
+                class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl"
+              >
+                <p class="pl-2">Event: ACCS 2023</p>
+              </div>
+              <div
+                class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg"
+              >
+                <p class="grow px-2">DadsMoney8</p>
+                <p class="grow text-right px-2">0 viewers</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="">
+          <div class="h-60 mx-4 my-2 bg-platinum rounded-lg">
+            <div
+              class="w-full h-full rounded-lg bg-black flex flex-row flex-wrap bg-opacity-40 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+            >
+              <div
+                class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl"
+              >
+                <p class="pl-2">Event: Rusan Shell</p>
+              </div>
+              <div
+                class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg"
+              >
+                <p class="grow px-2">CarGuy_7</p>
+                <p class="grow text-right px-2">17 viewers</p>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg">
-        <p class="grow px-2">DadsMoney8</p>
-        <p class="grow text-right px-2">0 viewers</p>
+
+      <div class="flex w-full my-6 justify-center">
+        <button
+          class="self-center transition ease-in-out delay-100 py-2 px-4 rounded-md text-white bg-falu-red hover:-translate-y-1 hover:scale-110 hover:bg-opacity-80 duration-200"
+        >
+          Load more...
+        </button>
       </div>
     </div>
 
-    <div class="h-60 mx-4 my-2 flex flex-row flex-wrap bg-platinum rounded-lg">
-      <div class="mt-8 w-5/12 bg-falu-red self-start opacity-60 text-white py-2 rounded-r-xl">
-        <p class="pl-2">Event: Rusan Shell</p>
+    <div class="py-10 my-10">
+      <h3 class="text-2xl text-white py-6 pl-4">Events</h3>
+
+      <div id="events" class="grid grid-cols-1 gap-x-0.5 md:grid-cols-2 py-10">
+        <div
+          class="h-60 md:h-72 mx-4 my-2 bg-stream bg-no-repeat bg-cover bg-center rounded-lg flex justify-center items-center"
+        >
+          <div
+            class="w-full h-full rounded-lg bg-black flex flex-row flex-wrap bg-opacity-50 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+          >
+            <h4 class="text-xl text-white py-2 text-center w-full">
+              Rusan Shell
+            </h4>
+            <p class="self-end text-white text-center w-full py-2 opacity-80">
+              27.09.2023
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="h-60 md:h-72 mx-4 my-2 bg-porsche bg-no-repeat bg-cover bg-center rounded-lg flex justify-center items-center"
+        >
+          <div
+            class="w-full h-full rounded-lg bg-black flex flex-row flex-wrap bg-opacity-50 hover:bg-opacity-20 transition ease-in-out delay-100 duration-300"
+          >
+            <h4 class="text-xl text-white py-2 text-center w-full">
+              ACCS 2023
+            </h4>
+            <p class="self-end text-white text-center w-full py-2 opacity-80">
+              05.10.2029
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="w-full py-2 flex flex-row self-end text-white bg-raisin-black opacity-50 hover:text-platinum rounded-b-lg">
-        <p class="grow px-2">CarGuy_7</p>
-        <p class="grow text-right px-2">17 viewers</p>
+
+      <div class="flex w-full my-6 justify-center">
+        <button
+          class="self-center transition ease-in-out delay-100 py-2 px-4 rounded-md text-white bg-falu-red hover:-translate-y-1 hover:scale-110 hover:bg-opacity-80 duration-200"
+        >
+          Load more...
+        </button>
       </div>
     </div>
 
-    <div class="flex w-full my-6 justify-center">
-      <button class="self-center transition ease-in-out delay-100 py-2 px-4 rounded-md text-white bg-falu-red hover:-translate-y-1 hover:scale-110 hover:bg-opacity-80 duration-200">
-        Load more...
-      </button>
-    </div>
-  </div>
+    <footer id="aboutus" class="bg-delft-blue mt-10">
+      <p class="text-white text-center text-xl py-20">Footer</p>
+    </footer>
 
-  <div id="events" class="flex flex-col py-10 my-10">
-    <h3 class="text-2xl text-white py-6 pl-4">Events</h3>
-    
-    <div class="h-60 mx-4 my-2 flex flex-row flex-wrap bg-platinum rounded-lg">
-      <h4 class="text-xl py-2 text-center w-full">Rusan Shell</h4>
-      <p class="self-end text-center w-full py-2 opacity-80">04.09.2023</p>
-    </div>
+    <script>
+      let menu = document.getElementById("menu");
 
-    <div class="h-60 mx-4 my-2 flex flex-row flex-wrap bg-platinum rounded-lg">
-      <h4 class="text-xl py-2 text-center w-full">ACCS 2023</h4>
-      <p class="self-end text-center w-full py-2 opacity-80">05.09.2029</p>
-    </div>
-
-    <div class="flex w-full my-6 justify-center">
-      <button class="self-center transition ease-in-out delay-100 py-2 px-4 rounded-md text-white bg-falu-red hover:-translate-y-1 hover:scale-110 hover:bg-opacity-80 duration-200">
-        Load more...
-      </button>
-    </div>
-  </div>
-
-  <footer id="aboutus" class="bg-delft-blue mt-10">
-    <p class="text-white text-center text-xl py-20">Footer</p>
-  </footer>
-
-  <script>
-    let menu = document.getElementById("menu");
-  
-    // this function is used to open the menu
-    function openMenu() {
+      // this function is used to open the menu
+      function openMenu() {
         menu.classList.remove("w-0", "h-0", "opacity-0");
         menu.classList.add("w-screen", "h-screen", "opacity-96");
-    }
-  
-    // this function is used to close the menu
-    function closeMenu() {
+      }
+
+      // this function is used to close the menu
+      function closeMenu() {
         menu.classList.remove("w-screen", "h-screen", "opacity-96");
         menu.classList.add("w-0", "h-0", "opacity-0");
-    }
-  </script>
-</body>
+      }
+    </script>
+  </body>
 </html>

@@ -45,7 +45,7 @@ uForm.addEventListener("submit", (event) => {
 socket.on("chat message", (msg) => {
   const item = document.createElement("li");
   item.innerHTML = msg;
-  item.classList = "m-1"
+  item.classList = "m-1";
   document.getElementById("messages").appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
